@@ -1,0 +1,44 @@
+services:
+  app:
+    build:
+      context: ./docker/php
+    container_name: oficina_app
+    working_dir: /var/www
+    volumes:
+      - ./src:/var/www
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    networks:
+      - oficina_net
+
+  db:
+    image: postgres:16
+    container_name: oficina_db
+    restart: always
+    environment:
+      POSTGRES_DB: oficina
+      POSTGRES_USER: oficina_user
+      POSTGRES_PASSWORD: oficina_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - oficina_net
+
+  redis:
+    image: redis:7-alpine
+    container_name: oficina_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - oficina_net
+
+networks:
+  oficina_net:
+
+volumes:
+  db_data:
