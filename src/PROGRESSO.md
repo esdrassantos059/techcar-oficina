@@ -229,11 +229,12 @@ Fluxo padrão: `git add .` → `git commit -m "mensagem"` → `git push`.
 - [x] `docker compose up -d` executado — 3 containers `Up`
 - [x] Diagnóstico do carregamento lento (hipótese IPv6, não confirmada)
 - [x] Erro de `sessions` diagnosticado; `php artisan migrate` indicado como correção
-- [ ] Confirmar que `php artisan migrate` rodou sem erro e a página carrega normalmente
+- [x] Confirmar execução das migrations padrão e do domínio via `migrate:status` (Etapa 13)
+- [ ] Verificar novamente a página inicial pelo navegador
 - [x] Confirmar `git init` e commits locais (ver Etapa 9)
 - [x] Enviar os commits da estrutura Laravel e das migrations ao GitHub e confirmar o push (Etapa 12)
 - [x] Criar migrations específicas do domínio: `marca`, `pessoa`, `carro`, `revisao` (arquivos concluídos; ver Etapa 11)
-- [ ] Aplicar e confirmar as migrations do domínio no PostgreSQL do projeto
+- [x] Confirmar as migrations do domínio aplicadas no PostgreSQL do projeto (Etapa 13)
 - [ ] Criar models com relacionamentos Eloquent (`Marca`, `Pessoa`, `Carro`, `Revisao`)
 - [ ] Seeder de marcas (lista fixa: Chevrolet, Volkswagen, Fiat, Ford, Toyota, Honda, Hyundai, Renault)
 - [ ] Controllers CRUD (`PessoaController`, `CarroController`, `RevisaoController`)
@@ -410,3 +411,25 @@ Referência consultada: [Migrations do Laravel 13](https://laravel.com/framework
 - O Git confirmou o avanço remoto de `fe4fbfc` para `9a7a047`, incluindo o commit `9273230` da estrutura Laravel, que também estava pendente.
 - A seleção de `sarphorus` foi aplicada apenas ao comando de push, sem alterar a configuração global do Git nem o destino do repositório.
 - O envio ao GitHub registra os arquivos; a aplicação das migrations no PostgreSQL continua pendente de confirmação.
+
+---
+
+## Etapa 13 — Ponto de retomada antes de desligar
+
+- O usuário autorizou concluir o backend e fazer commits e envios incrementais, sem confirmações de rotina. Depois pediu para pausar e salvar o estado antes de desligar.
+- Docker localizado no ambiente do usuário em `C:\Users\esdra\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe`. O terminal restrito do assistente não enxerga esse executável; os comandos Docker funcionaram no contexto autorizado do usuário.
+- Confirmados os três containers ativos: `oficina_app`, `oficina_db` e `oficina_redis`.
+- Confirmados PHP 8.3.33 e Composer 2.10.3 no container da aplicação.
+- `docker compose exec -T app php artisan migrate:status` confirmou todas as sete migrations executadas: as três padrão no lote 1 e as quatro do domínio no lote 2. Isso atualiza as pendências históricas das etapas anteriores.
+- O AGENTS.md existente exige Laravel Boost antes da implementação. Foi iniciado `docker compose exec -T app composer require laravel/boost --dev --no-interaction`.
+- `composer.json` e `composer.lock` foram atualizados com Laravel Boost 2.8.0 e suas dependências. No momento deste registro, o processo de instalação ainda não havia retornado conclusão; a presença dos arquivos em `vendor` não confirma que todos os passos terminaram.
+- Nenhum model, controller, seeder do domínio ou relatório foi implementado nesta etapa.
+
+### Retomada
+
+1. Conferir se a instalação do Composer terminou; se necessário, executar `docker compose exec -T app composer install --no-interaction` para completar a instalação a partir do lock salvo.
+2. Executar `php artisan boost:install` no container e reler o AGENTS.md gerado.
+3. Implementar models e seeder de marcas; validar e fazer commit.
+4. Implementar CRUDs com validação e rotas de API; validar e fazer commit.
+5. Implementar relatórios com cache Redis, SQLs de referência, testes e documentação; validar e fazer commit.
+6. Continuar usando `sarphorus` nos envios para o origin já configurado.
