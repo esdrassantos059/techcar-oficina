@@ -1,4 +1,0 @@
-src/vendor/
-src/.env
-src/node_modules/
-src/storage/*.key
