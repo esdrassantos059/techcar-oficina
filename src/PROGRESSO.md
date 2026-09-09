@@ -231,7 +231,7 @@ Fluxo padrão: `git add .` → `git commit -m "mensagem"` → `git push`.
 - [x] Erro de `sessions` diagnosticado; `php artisan migrate` indicado como correção
 - [ ] Confirmar que `php artisan migrate` rodou sem erro e a página carrega normalmente
 - [x] Confirmar `git init` e commits locais (ver Etapa 9)
-- [ ] Enviar o commit da estrutura Laravel ao GitHub e confirmar o push
+- [x] Enviar os commits da estrutura Laravel e das migrations ao GitHub e confirmar o push (Etapa 12)
 - [x] Criar migrations específicas do domínio: `marca`, `pessoa`, `carro`, `revisao` (arquivos concluídos; ver Etapa 11)
 - [ ] Aplicar e confirmar as migrations do domínio no PostgreSQL do projeto
 - [ ] Criar models com relacionamentos Eloquent (`Marca`, `Pessoa`, `Carro`, `Revisao`)
@@ -333,7 +333,7 @@ Este documento foi recuperado do PROGRESSO.md fornecido pelo usuário. A cópia 
 - Commit `9273230`: `Adiciona estrutura inicial do Laravel e regras do gitigore`. Confirmado no histórico local após o usuário preparar os arquivos com `git add .`.
 - O segundo commit registra a estrutura do Laravel e o ajuste dos arquivos `.gitignore`.
 - O `.env` e as pastas de dependências `vendor` e `node_modules` ficaram fora da lista de arquivos preparados.
-- O envio do segundo commit ao GitHub ainda não foi verificado.
+- O envio do segundo commit ao GitHub foi posteriormente confirmado na Etapa 12.
 
 ### Conceitos estudados
 
@@ -399,3 +399,14 @@ O usuário autorizou o assistente a gerar o código e esclareceu o escopo: **ape
 - **As migrations ainda não foram aplicadas nem testadas no PostgreSQL do projeto nesta etapa.** Os testes em memória não substituem essa confirmação.
 
 Referência consultada: [Migrations do Laravel 13](https://laravel.com/framework/docs/13.x/migrations).
+
+---
+
+## Etapa 12 — Commit e envio ao GitHub confirmados
+
+- A pedido do usuário, o assistente criou o commit `9a7a047`: `Adiciona migrations da oficina e registro de progresso`.
+- O usuário informou que a conta correta para autenticação é `sarphorus`.
+- O push com essa conta foi concluído para `origin/main`, no repositório `https://github.com/esdrassantos059/techcar-oficina.git`.
+- O Git confirmou o avanço remoto de `fe4fbfc` para `9a7a047`, incluindo o commit `9273230` da estrutura Laravel, que também estava pendente.
+- A seleção de `sarphorus` foi aplicada apenas ao comando de push, sem alterar a configuração global do Git nem o destino do repositório.
+- O envio ao GitHub registra os arquivos; a aplicação das migrations no PostgreSQL continua pendente de confirmação.
